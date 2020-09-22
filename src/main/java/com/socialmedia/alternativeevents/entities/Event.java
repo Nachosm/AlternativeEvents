@@ -2,19 +2,15 @@ package com.socialmedia.alternativeevents.entities;
 
 import java.math.BigInteger;
 import java.time.ZonedDateTime;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -31,10 +27,23 @@ public class Event {
 	@Column(name="endTime")
 	private ZonedDateTime endTime;
 	
+	@Column(name="sortingOrder")
+	private BigInteger sortingOrder;
+	
+	@Column(name="postedDate")
+	private ZonedDateTime postedDate;
+	
+	@Column(name="userId")
+	private BigInteger userId;
+	/*
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
 			CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name="userId")
-	private User user;
+	private User user;*/
+	
+	
+	
+	
 	/*
 	@OneToOne(mappedBy="event",
 			fetch=FetchType.LAZY, cascade = CascadeType.ALL)
@@ -55,12 +64,21 @@ public class Event {
 	public Event() {
 	}
 
+	public Event(BigInteger id, ZonedDateTime startTime, ZonedDateTime endTime, BigInteger sortingOrder,
+			ZonedDateTime postedDate, BigInteger userId) {
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.sortingOrder = sortingOrder;
+		this.postedDate = postedDate;
+		this.userId = userId;
+	}
+/*
 	public Event(ZonedDateTime startTime, ZonedDateTime endTime, User user) {
 		super();
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.user = user;
-	}
+	}*/
 
 	public BigInteger getId() {
 		return id;
@@ -86,19 +104,34 @@ public class Event {
 		this.endTime = endTime;
 	}
 
-	public User getUser() {
-		return user;
+	public BigInteger getSortingOrder() {
+		return sortingOrder;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setSortingOrder(BigInteger sortingOrder) {
+		this.sortingOrder = sortingOrder;
 	}
 
-	
+	public ZonedDateTime getPostedDate() {
+		return postedDate;
+	}
+
+	public void setPostedDate(ZonedDateTime postedDate) {
+		this.postedDate = postedDate;
+	}
+
+	public BigInteger getUserId() {
+		return userId;
+	}
+
+	public void setUserId(BigInteger userId) {
+		this.userId = userId;
+	}
 
 	@Override
 	public String toString() {
-		return "Event [id=" + id + ", startTime=" + startTime + ", endTime=" + endTime + ", user=" + user + "]";
+		return "Event [id=" + id + ", startTime=" + startTime + ", endTime=" + endTime + ", sortingOrder="
+				+ sortingOrder + ", postedDate=" + postedDate + ", userId=" + userId + "]";
 	}
 	
 	
